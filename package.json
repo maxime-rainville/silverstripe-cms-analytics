@@ -1,0 +1,65 @@
+{
+  "name": "silverstripe-cms-analytics",
+  "version": "0.0.0",
+  "description": "Add support for tracking Silverstripe CMS usage in Google Analytics.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "bin": {
+    "webpack": "./node_modules/webpack/webpack.js"
+  },
+  "engines": {
+    "node": ">=6.x"
+  },
+  "scripts": {
+    "build": "npm run lint && npm test && NODE_ENV=production webpack -p --bail --progress",
+    "dev": "NODE_ENV=development webpack --progress",
+    "watch": "NODE_ENV=development webpack --watch --progress",
+    "css": "WEBPACK_CHILD=css npm run build",
+    "test": "jest",
+    "coverage": "jest --coverage",
+    "lint": "eslint client/src",
+    "js-fix": "eslint client/src --fix"
+  },
+  "author": "Maxime Rainville",
+  "license": "ISC",
+  "dependencies": {
+    "history": "^2.1.2"
+  },
+  "devDependencies": {
+    "@silverstripe/webpack-config": "^0.8.0",
+    "@types/jest": "^22.2.3",
+    "copy-webpack-plugin": "^4.5.1",
+    "jest": "^22.4.3",
+    "ts-jest": "^22.4.4",
+    "ts-loader": "^3.5.0",
+    "typescript": "^2.8.3",
+    "webpack": "^2.7.0",
+    "webpack-cli": "^2.1.2"
+  },
+  "jest": {
+    "roots": [
+      "client/src"
+    ],
+    "moduleDirectories": [
+      "client/src",
+      "node_modules",
+      "node_modules/@silverstripe/webpack-config/node_modules"
+    ],
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testMatch": [
+      "**/tests/**/*-test.ts?(x)"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
+  }
+}

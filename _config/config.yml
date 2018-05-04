@@ -1,0 +1,6 @@
+---
+Name: cmsanalytics
+---
+SilverStripe\Admin\LeftAndMain:
+  extensions:
+    - MaximeRainville\SilverstripeCmsAnalytics\LeftAdminExtension
