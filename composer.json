@@ -1,5 +1,5 @@
 {
-    "name": "maximerainville/silverstripe-cms-analytics",
+    "name": "maxime-rainville/silverstripe-cms-analytics",
     "description": "Add analytics tracking to the Silverstripe CMS.",
     "type": "silverstripe-vendormodule",
     "license": "MIT",
