@@ -1,7 +1,5 @@
 const Path = require('path');
-const webpack = require('webpack');
 const webpackConfig = require('@silverstripe/webpack-config');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const {
   resolveJS,
   externalJS,
@@ -12,25 +10,20 @@ const {
 } = webpackConfig;
 
 const ENV = process.env.NODE_ENV;
-const PATHS = require('./webpack-vars');
+const PATHS = {
+  MODULES: 'node_modules',
+  FILES_PATH: '../',
+  ROOT: Path.resolve(),
+  SRC: Path.resolve('client/src'),
+  DIST: Path.resolve('client/dist'),
+  LEGACY_SRC: Path.resolve('client/src/entwine'),
+};
 
 const config = [
   {
     name: 'js',
     entry: {
-      bundle: `${PATHS.SRC}/bundles/bundle.ts`
-    },
-    module: {
-      rules: [
-        {
-          test: /\.tsx?$/,
-          use: 'ts-loader',
-          exclude: /node_modules/
-        }
-      ]
-    },
-    resolve: {
-      extensions: [ '.tsx', '.ts', '.js' ]
+      bundle: `${PATHS.SRC}/bundle.js`
     },
     output: {
       path: PATHS.DIST,
@@ -38,19 +31,26 @@ const config = [
     },
     devtool: (ENV !== 'production') ? 'source-map' : '',
     resolve: resolveJS(ENV, PATHS),
-    externals: externalJS(ENV, PATHS),
-    // module: moduleJS(ENV, PATHS),
-    plugins: [
-      ...pluginJS(ENV, PATHS),
-      // Most vendor libs are loaded directly into the 'vendor' bundle (through require()
-      // calls in vendor.js). This ensures that any further require() calls in other
-      // bundles aren't duplicating libs.
-      new webpack.optimize.CommonsChunkPlugin({
-        name: 'vendor',
-        minChunks: module => module.context && module.context.indexOf('/node_modules/') > -1,
-      }),
-    ],
-  }
+    externals: Object.assign(
+      {},
+      externalJS(ENV, PATHS)
+    ),
+    module: moduleJS(ENV, PATHS),
+    plugins: pluginJS(ENV, PATHS),
+  },
+  {
+    name: 'css',
+    entry: {
+      bundle: `${PATHS.SRC}/styles/bundle.scss`,
+    },
+    output: {
+      path: PATHS.DIST,
+      filename: 'styles/[name].css',
+    },
+    devtool: (ENV !== 'production') ? 'source-map' : '',
+    module: moduleCSS(ENV, PATHS),
+    plugins: pluginCSS(ENV, PATHS),
+  },
 ];
 
 // Use WEBPACK_CHILD=js or WEBPACK_CHILD=css env var to run a single config

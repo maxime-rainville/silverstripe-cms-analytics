@@ -2,5 +2,7 @@
 Name: cmsanalytics
 ---
 SilverStripe\Admin\LeftAndMain:
+  primary_ua: "UA-118775140-1"
   extensions:
     - MaximeRainville\SilverstripeCmsAnalytics\LeftAdminExtension
+

@@ -1,4 +1,4 @@
-const Path = require('path');
+onst Path = require('path');
 
 const PATHS = {
   MODULES: 'node_modules',

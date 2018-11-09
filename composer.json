@@ -24,7 +24,7 @@
     },
     "autoload": {
         "psr-4": {
-            "MaximeRainville\\SilverstripeCmsAnalytics\\": "code/",
+            "MaximeRainville\\SilverstripeCmsAnalytics\\": "src/",
             "MaximeRainville\\SilverstripeCmsAnalytics\\Tests\\": "tests/"
         }
     },

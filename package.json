@@ -2,7 +2,6 @@
   "name": "silverstripe-cms-analytics",
   "version": "0.0.0",
   "description": "Add support for tracking Silverstripe CMS usage in Google Analytics.",
-  "main": "index.js",
   "directories": {
     "test": "tests"
   },
@@ -13,14 +12,15 @@
     "node": ">=6.x"
   },
   "scripts": {
-    "build": "npm run lint && npm test && NODE_ENV=production webpack -p --bail --progress",
+    "build": "yarn && yarn lint && yarn test && NODE_ENV=production webpack -p --bail --progress",
     "dev": "NODE_ENV=development webpack --progress",
     "watch": "NODE_ENV=development webpack --watch --progress",
     "css": "WEBPACK_CHILD=css npm run build",
     "test": "jest",
     "coverage": "jest --coverage",
-    "lint": "eslint client/src",
-    "js-fix": "eslint client/src --fix"
+    "lint": "eslint client/src && sass-lint -v",
+    "js-fix": "eslint client/src --fix",
+    "pattern-lib": "yarn && start-storybook -p 6006"
   },
   "author": "Maxime Rainville",
   "license": "ISC",
@@ -28,15 +28,26 @@
     "history": "^2.1.2"
   },
   "devDependencies": {
-    "@silverstripe/webpack-config": "^0.8.0",
-    "@types/jest": "^22.2.3",
-    "copy-webpack-plugin": "^4.5.1",
-    "jest": "^22.4.3",
-    "ts-jest": "^22.4.4",
-    "ts-loader": "^3.5.0",
-    "typescript": "^2.8.3",
-    "webpack": "^2.7.0",
-    "webpack-cli": "^2.1.2"
+    "@silverstripe/eslint-config": "^0.0.5",
+    "@silverstripe/webpack-config": "^0.12.0",
+    "@storybook/addon-actions": "^3.2.19",
+    "@storybook/addon-options": "^3.2.19",
+    "@storybook/addon-notes": "^3.2.19",
+    "@storybook/react": "^3.2.19",
+    "babel-jest": "^20.0.3",
+    "copy-webpack-plugin": "^4.2.0",
+    "enzyme": "^3.4.4",
+    "enzyme-adapter-react-15.4": "^1.0.6",
+    "html-loader": "^0.5.1",
+    "jest-cli": "^19.0.2",
+    "storybook-addon-jsx": "^5.4.0",
+    "@storybook/addon-knobs": "^3.4.10",
+    "webpack": "^2",
+    "prop-types": "^15.6.2",
+    "webpack-sources": "^1.1.0"
+  },
+  "resolutions": {
+    "eslint": "^4.6.1"
   },
   "jest": {
     "roots": [
@@ -47,19 +58,20 @@
       "node_modules",
       "node_modules/@silverstripe/webpack-config/node_modules"
     ],
-    "transform": {
-      "^.+\\.tsx?$": "ts-jest"
-    },
     "testMatch": [
-      "**/tests/**/*-test.ts?(x)"
+      "**/tests/**/*-test.js?(x)"
     ],
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
+    "transform": {
+      ".*": "babel-jest"
+    }
+  },
+  "babel": {
+    "presets": [
+      "env",
+      "react"
+    ],
+    "plugins": [
+      "transform-object-rest-spread"
     ]
   }
 }
