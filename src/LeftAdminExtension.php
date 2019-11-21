@@ -22,6 +22,14 @@ window.ss.analytics = {$this->getAnalyticsConfig()};
 JS
             );
             Requirements::javascript('https://www.googletagmanager.com/gtag/js?id=' . $ua);
+            Requirements::customScript( <<<JS
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-153110325-1');
+JS
+            );
             Requirements::javascript('maxime-rainville/silverstripe-cms-analytics:client/dist/js/bundle.js');
         }
 
