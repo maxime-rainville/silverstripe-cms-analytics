@@ -1,13 +1,10 @@
 <?php
 
-namespace MaximeRainville\SilverstripeCmsAnalytics;
+namespace MaximeRainville\SilverstripeCmsAnalytics\Extension;
 
 use SilverStripe\Control\Director;
 use SilverStripe\Core\Extension;
-use SilverStripe\Security\Group;
-use SilverStripe\Security\Member;
 use SilverStripe\Security\Permission;
-use SilverStripe\Security\Security;
 use SilverStripe\View\Requirements;
 
 class LeftAdminExtension extends Extension
