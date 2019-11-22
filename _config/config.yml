@@ -2,7 +2,12 @@
 Name: cmsanalytics
 ---
 SilverStripe\Admin\LeftAndMain:
-  primary_ua: "UA-118775140-1"
+  # todo: this is confusing as hell. Should be analytics_code (confused with Google Analytics field in Settings)
+  primary_ua: "UA-153110325-1"
   extensions:
     - MaximeRainville\SilverstripeCmsAnalytics\LeftAdminExtension
 
+#LeftAndMain:
+#  CmsAnalyticsEngines:
+#  - main: {type: "google-analytics", code: "UA-XXXXX"}
+#  - custom: {type: "crazyegg", code: "CRAZYCODE"}
