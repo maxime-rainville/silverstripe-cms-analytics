@@ -5,4 +5,18 @@ SilverStripe\Admin\LeftAndMain:
   primary_ua: "UA-118775140-1"
   extensions:
     - MaximeRainville\SilverstripeCmsAnalytics\LeftAdminExtension
-
+  cmsAnalyticsVersion: 1
+  cmsAnalyticsContent: >
+    <p>
+    We would like to share anonymous usage data
+    with Silverstripe and their analytics partner,
+    to build a better CMS experience for users like you!
+    </p>
+    <p>
+    Your personal data and website content will not be shared with them.
+    You can withdraw permission at any time in your
+    <a href="/admin/myprofile">profile</a>.
+    </p>
+    <p>
+    <a href="/admin/cms-tracking-policy">Learn more?<a>
+    </p>
