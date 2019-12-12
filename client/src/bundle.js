@@ -1,29 +1,20 @@
-import gtag from './gtag';
-
-
 document.addEventListener('DOMContentLoaded', () => {
+  window.ss.router((context, next) => {
+    let path = context.path;
 
-  gtag('js', new Date());
-  gtag('config', window.ss.analytics['primary_ua']);
-  ga('create', window.ss.analytics['primary_ua']);
-
-  ga('set', {
-    'dimension1': window.ss.analytics['environment'],
-    'dimension2': window.ss.analytics['cms_version'],
-    'dimension3': window.ss.analytics['cms_version_number'],
-    'dimension4': window.ss.analytics['permissions'],
-    'dimension4': window.ss.analytics['controller'],
-  });
-
-  window.ss.router.subscribe(({path}) => {
+    // update the current page
     ga('set', 'page', path);
-    console.log(path);
+
+    // send the pageview event
     ga('send', 'pageview', path);
+
+    // trigger the next callback
+    next();
   });
 
-  jQuery( "body" ).on( "click", ".btn.action", (event) => {
+  // send click events
+  jQuery("body").on("click", ".btn.action", (event) => {
     const target = jQuery(event.currentTarget);
-    console.dir(target);
     ga(
       'send',
       'event',
@@ -34,24 +25,25 @@ document.addEventListener('DOMContentLoaded', () => {
     );
   })
 
+  // send react router events
+  // todo:
   // reactRouteRegister.add({
-   //   path: sectionConfig.url,
-   //   component: AssetAdminRouter,
-   //   indexRoute: { component: AssetAdminRouter },
-   //   childRoutes: [
-   //     {
-   //       path: 'show/:folderId/:viewAction/:fileId',
-   //       component: AssetAdminRouter,
-   //     },
-   //     {
-   //       path: 'show/:folderId/:viewAction',
-   //       component: AssetAdminRouter,
-   //     },
-   //     {
-   //       path: 'show/:folderId',
-   //       component: AssetAdminRouter,
-   //     },
-   //   ],
-   // });
-
- });
+  //   path: sectionConfig.url,
+  //   component: AssetAdminRouter,
+  //   indexRoute: { component: AssetAdminRouter },
+  //   childRoutes: [
+  //     {
+  //       path: 'show/:folderId/:viewAction/:fileId',
+  //       component: AssetAdminRouter,
+  //     },
+  //     {
+  //       path: 'show/:folderId/:viewAction',
+  //       component: AssetAdminRouter,
+  //     },
+  //     {
+  //       path: 'show/:folderId',
+  //       component: AssetAdminRouter,
+  //     },
+  //   ],
+  // });
+});
